@@ -1,16 +1,9 @@
-import express from "express"
-import Class from "../models/Class.js"
-const router = express.Router()
+import express from "express";
+import { getClasses, createClass } from "../Controllers/classController.js";
 
-router.get("/", async (req, res) => {
-    const classes = await Class.find()
-    res.json(classes)
-})
+const router = express.Router();
 
-router.post("/", async (req, res) => {
-    const newClass = new Class(req.body)
-    const saved = await newClass.save()
-    res.json(saved)
-})
+router.get("/", getClasses);
+router.post("/", createClass);
 
-export default router
+export default router;

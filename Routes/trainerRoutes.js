@@ -1,16 +1,9 @@
-import express from "express"
-import Trainer from "../models/Trainer.js"
-const router = express.Router()
+import express from "express";
+import { getTrainers, createTrainer } from "../Controllers/trainerController.js";
 
-router.get("/", async (req, res) => {
-    const trainers = await Trainer.find()
-    res.json(trainers)
-})
+const router = express.Router();
 
-router.post("/", async (req, res) => {
-    const trainer = new Trainer(req.body)
-    const saved = await trainer.save()
-    res.json(saved)
-})
+router.get("/", getTrainers);
+router.post("/", createTrainer);
 
-export default router
+export default router;
